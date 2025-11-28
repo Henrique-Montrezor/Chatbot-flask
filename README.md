@@ -84,17 +84,3 @@ Conecte seu repositório GitHub.
 Adicione as Variáveis de Ambiente (as mesmas do .env) no painel de configuração da hospedagem.
 
 O comando de inicialização será lido automaticamente do Procfile.
-
-📂 Estrutura de Arquivos
-
-/
-├── backend/
-│   ├── app.py           # Lógica do servidor Flask e Socket.IO
-│   └── .env             # Arquivo de configuração (NÃO COMITAR NO GIT)
-├── static/
-│   └── css/
-│       └── style.css    # Estilos da interface
-├── templates/
-│   └── index.html       # Interface do chat (HTML + JS Client)
-├── requirements.txt     # Lista de dependências
-└── README.md            # Documentação
