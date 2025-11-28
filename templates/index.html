@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Bibliotecas para Markdown e Sanitização -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Chatbot Python IA
+        </div>
+        
+        <div class="messages-area" id="messagesArea">
+            <!-- Mensagens aparecerão aqui -->
+        </div>
+
+        <form class="input-area" id="chatForm">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem..." autocomplete="off">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Configuração opcional do Marked.js para quebra de linha com Enter
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        function addToChat(msg) {
+            const div = document.createElement('div');
+            const messagesArea = document.getElementById('messagesArea');
+            
+            div.classList.add('message');
+            
+            // Tratamento do conteúdo
+            let content = '';
+            
+            if (msg.name === 'Sistema') {
+                div.classList.add('system-msg');
+                // 1. Converte Markdown para HTML
+                const rawHtml = marked.parse(msg.message);
+                // 2. Sanitiza o HTML (segurança)
+                const cleanHtml = DOMPurify.sanitize(rawHtml);
+                
+                content = `<strong>🤖 ${msg.name}:</strong> <div>${cleanHtml}</div>`;
+            } else {
+                div.classList.add('received');
+                // Mensagem do usuário geralmente é texto puro, mas podemos escapar HTML para segurança
+                const safeText = msg.message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                content = `<strong>👤 ${msg.name}:</strong> ${safeText}`;
+            }
+
+            div.innerHTML = content;
+            messagesArea.appendChild(div);
+            
+            // Auto-scroll suave
+            messagesArea.scrollTo({
+                top: messagesArea.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        socket.on('connect', () => {
+            console.log('Conectado ao servidor WebSocket');
+            socket.emit('getHistory');
+        });
+
+        document.getElementById('chatForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+            
+            if (message.trim() !== '') {                
+                socket.emit('sendMessage', { name: 'Usuário', message: message });
+                messageInput.value = '';
+                messageInput.focus();
+            }
+        });
+
+        socket.on('getMessage', (msg) => {
+            addToChat(msg);
+        });
+
+        socket.on('history', (msgs) => {
+            document.getElementById('messagesArea').innerHTML = '';
+            msgs.forEach(m => addToChat(m));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+        :root {
+            --bg-color: #f4f4f9;
+            --chat-bg: #ffffff;
+            --primary-color: #4a90e2;
+            --user-msg-bg: #dcf8c6;
+            --system-msg-bg: #e9e9eb;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--chat-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .messages-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 10px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        /* Estilo das mensagens do usuário */
+        .received {
+            align-self: flex-end;
+            background-color: var(--user-msg-bg);
+            border-bottom-right-radius: 2px;
+        }
+
+        /* Estilo das mensagens do sistema/IA */
+        .system-msg {
+            align-self: flex-start;
+            background-color: var(--system-msg-bg);
+            border-bottom-left-radius: 2px;
+        }
+
+        /* --- Formatação de Markdown dentro das mensagens --- */
+        .message strong { font-weight: 700; }
+        .message em { font-style: italic; }
+        
+        .message p {
+            margin: 0 0 10px 0;
+        }
+        .message p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message ul, .message ol {
+            margin: 5px 0 10px 20px;
+            padding: 0;
+        }
+
+        /* Blocos de código */
+        .message pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .message code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .message pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Área de Input */
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background-color: #eee;
+            border-top: 1px solid #ddd;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .input-area button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .input-area button:hover {
+            background-color: #357abd;
+        }
