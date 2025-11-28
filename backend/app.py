@@ -42,9 +42,9 @@ messages = []
 # Configurações da API
 _url_raw = os.environ.get('API_TOKEN_URL', '')
 API_URL = _url_raw.strip().rstrip('/')
-API_TOKEN = os.environ.get('API_TOKEN_LARA_AI') 
+API_TOKEN = os.environ.get('API_TOKEN_AGENT_AI') 
 
-def ask_lara_ai(mensagem_usuario):
+def ask_agent_ai(mensagem_usuario):
     """
     Envia o texto para a API externa e retorna a resposta limpa.
     """
@@ -103,12 +103,12 @@ def handle_send_message(msg):
 ### Comandos Disponíveis:
 * `ajuda`: Mostra esta mensagem.
 * `status`: Verifica conexão.
-* **Qualquer outra coisa**: Conversa com a **Lara AI**.
+* **Qualquer outra coisa**: Conversa com a **Agente AI**.
             """
         elif texto_usuario == 'status':
-            resposta_servidor = "✅ Sistema online. Conectado à Lara AI."
+            resposta_servidor = "✅ Sistema online. Conectado à agente AI."
         else:
-            resposta_servidor = ask_lara_ai(msg['message'])
+            resposta_servidor = ask_agent_ai(msg['message'])
 
     if resposta_servidor:
         bot_msg = {'name': 'Sistema', 'message': resposta_servidor}
