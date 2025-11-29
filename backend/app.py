@@ -43,6 +43,7 @@ messages = []
 _url_raw = os.environ.get('API_TOKEN_URL', '')
 API_URL = _url_raw.strip().rstrip('/')
 API_TOKEN = os.environ.get('API_TOKEN_AGENT_AI') 
+ASSISTANT_ID = os.environ.get('ASSISTANT_ID')
 
 def ask_agent_ai(mensagem_usuario):
     """
@@ -53,7 +54,7 @@ def ask_agent_ai(mensagem_usuario):
 
     try:
         body = {
-            "assistantId": "1764179347569-74c0cb9f-0a2c-479a-8d48-0dc9c01a1a02",
+            "assistantId": ASSISTANT_ID.strip(), #alterar o ID com base na documentação do seu agente AI (se houver)
             "prompt": mensagem_usuario,
             "responseFormat": "markdown"
         }
