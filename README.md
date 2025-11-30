@@ -1,86 +1,87 @@
-# Chatbot Flask com Socket.IO e IA
+#Flask Chatbot with Socket.IO and AI
 
-Este projeto é um Chatbot em tempo real desenvolvido com Python (Flask) e Socket.IO. Ele possui uma interface web moderna e se integra a uma API externa de Inteligência Artificial para responder às mensagens dos usuários.
+This project is a real-time Chatbot built with Python (Flask) and Socket.IO. It features a modern web interface and integrates with an external Artificial Intelligence API to respond to user messages.
 
-📋 Funcionalidades
+📋 Features
 
-Comunicação em Tempo Real: Uso de WebSockets para envio e recebimento instantâneo de mensagens.
+Real-time Communication: Uses WebSockets for instant message sending and receiving.
 
-Interface Responsiva: Design limpo e adaptável (CSS incluso).
+Responsive Interface: Clean and adaptable design (CSS included).
 
-Formatação Markdown: As respostas da IA suportam formatação (negrito, listas, código) renderizadas via marked.js.
+Markdown Formatting: AI responses support formatting (bold, lists, code) rendered via marked.js.
 
-Histórico de Chat: O chat mantém o histórico das mensagens na sessão atual.
+Chat History: The chat maintains message history for the current session.
 
-Configuração Segura: Uso de variáveis de ambiente (.env) para proteger chaves de API.
+Secure Configuration: Uses environment variables (.env) to protect API keys.
 
-🚀 Como Rodar o Projeto Localmente
+🚀 How to Run the Project Locally
 
-1. Pré-requisitos
+1. Prerequisites
 
-Certifique-se de ter o Python 3.x instalado em sua máquina.
+Make sure you have Python 3.x installed on your machine.
 
-2. Instalação das Dependências
+2. Installation
 
-Abra o terminal na pasta raiz do projeto e execute:
+Open your terminal in the project's root folder and install the dependencies:
 
 pip install -r requirements.txt
 
 
-Nota: ou instale diretamente com:
+Note: Alternatively, you can install the packages directly:
+
 pip install flask flask-socketio requests python-dotenv
 
-3. Configurando o .env (Variáveis de Ambiente)
 
-O arquivo .env serve para guardar configurações sensíveis que não devem ser compartilhadas publicamente (como senhas e tokens).
+3. Configuration (.env)
 
-Crie um arquivo chamado .env na pasta backend/ (ou na raiz, onde está o app.py).
+The .env file is used to store sensitive configurations that should not be shared publicly (such as passwords and tokens).
 
-Copie o conteúdo abaixo e cole no arquivo:
+Create a file named .env in the backend/ folder (or in the root, wherever app.py is located).
 
-# Chave secreta do Flask (pode ser qualquer texto aleatório seguro)
-SECRET_KEY=sua_chave_secreta_super_segura
+Copy the content below and paste it into the file:
 
-# URL da API de Inteligência Artificial
-API_TOKEN_URL=[https://api.exemplo.com/v1/chat](https://api.exemplo.com/v1/chat)
+# Flask Secret Key (can be any secure random text)
+SECRET_KEY=your_super_secure_secret_key
 
-# Seu Token de autenticação da API
-API_TOKEN_AGENT_AI=seu_token_aqui_12345
+# AI API URL
+API_TOKEN_URL=[https://api.example.com/v1/chat](https://api.example.com/v1/chat)
+
+# Your API Authentication Token
+API_TOKEN_AGENT_AI=your_token_here_12345
 
 
-Importante: Substitua https://api.exemplo.com/v1/chat e seu_token_aqui_12345 pelos dados reais da sua API de IA.
+Important: Replace https://api.example.com/v1/chat and your_token_here_12345 with your actual AI API credentials.
 
-4. Executando o Chatbot
+4. Running the Chatbot
 
-No terminal, navegue até a pasta onde está o arquivo app.py (geralmente backend/) e execute:
+In the terminal, navigate to the folder containing the app.py file (usually backend/) and run:
 
 python app.py
 
 
-Se tudo der certo, você verá algo como:
-Running on http://127.0.0.1:5000
+If successful, you will see a message indicating the server is running. Open your browser and access:
 
-Abra seu navegador e acesse: https://www.google.com/search?q=http://127.0.0.1:5000
+http://127.0.0.1:5000
 
-☁️ Como Publicar (Deploy)
+☁️ Deployment
 
-Para colocar seu chatbot online para que outras pessoas usem, você não deve usar o comando python app.py (que é apenas para desenvolvimento). Você precisará de um servidor de produção.
+To deploy your chatbot for public use, do not use the development server (python app.py). You will need a production server setup.
 
-Opção Recomendada: Render ou Railway
+Recommended Option: Render or Railway
 
-Plataformas como Render ou Railway são ótimas para projetos Python com Socket.IO.
+Platforms like Render or Railway are excellent for Python projects utilizing Socket.IO.
 
-Crie um arquivo Procfile (sem extensão) na raiz do projeto com o seguinte conteúdo (necessário instalar gunicorn e eventlet):
+Create a file named Procfile (no extension) in the project root with the following content (requires gunicorn and eventlet):
 
 web: gunicorn --worker-class eventlet -w 1 backend.app:app
 
 
-(Nota: Ajuste backend.app:app dependendo da estrutura das suas pastas. Se app.py estiver na raiz, use apenas app:app).
+(Note: Adjust backend.app:app depending on your folder structure. If app.py is in the root, use just app:app).
 
-No seu serviço de hospedagem:
+In your hosting service:
 
-Conecte seu repositório GitHub.
+Connect your GitHub repository.
 
-Adicione as Variáveis de Ambiente (as mesmas do .env) no painel de configuração da hospedagem.
+Add the Environment Variables (the same keys from your .env) in the hosting configuration panel.
 
-O comando de inicialização será lido automaticamente do Procfile.
+The start command will be automatically detected from the Procfile.
