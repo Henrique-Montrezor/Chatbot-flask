@@ -1,4 +1,4 @@
-#Flask Chatbot with Socket.IO and AI
+# Flask Chatbot with Socket.IO and AI
 
 This project is a real-time Chatbot built with Python (Flask) and Socket.IO. It features a modern web interface and integrates with an external Artificial Intelligence API to respond to user messages.
 
